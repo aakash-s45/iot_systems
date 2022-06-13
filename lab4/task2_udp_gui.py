@@ -81,7 +81,7 @@ buffersize=1024;
 num=random.randint(1,50);
 prev_time=time.time();
 curr_time=prev_time;
-time_gap=40;
+time_gap=20;
 
 light=Appliance(2);
 ac=Appliance(3);
