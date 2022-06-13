@@ -1,0 +1,1896 @@
+[
+    {
+        "id": "41bf12d61cceb1af",
+        "type": "tab",
+        "label": "Flow 8",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7405f1e93561d01d",
+        "type": "mqtt in",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "topic": "wifi/from/node3",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e0aec7d65c99bf93",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 120,
+        "wires": [
+            [
+                "3d33ed6ac5678c92",
+                "e9c4cafa917d7eb5",
+                "ce8d0aea405574de"
+            ]
+        ]
+    },
+    {
+        "id": "3d33ed6ac5678c92",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "e9c4cafa917d7eb5",
+        "type": "json",
+        "z": "41bf12d61cceb1af",
+        "name": "MsgtoMap",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 210,
+        "y": 200,
+        "wires": [
+            [
+                "026fa9d6b2603e42",
+                "de4088c65f6da258",
+                "ab533d44c6875e95"
+            ]
+        ]
+    },
+    {
+        "id": "026fa9d6b2603e42",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "return temp",
+        "func": "a=msg.payload.temp\nif(a==0){\n    a=23;\n}\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "40d47c0eaacf5677"
+            ]
+        ]
+    },
+    {
+        "id": "40d47c0eaacf5677",
+        "type": "ui_numeric",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "label": "Temperature",
+        "tooltip": "",
+        "group": "968adf5ec2a351cd",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": false,
+        "topic": "temperature",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": "15",
+        "max": "30",
+        "step": 1,
+        "className": "",
+        "x": 550,
+        "y": 260,
+        "wires": [
+            [
+                "1b5f010113337792"
+            ]
+        ]
+    },
+    {
+        "id": "de4088c65f6da258",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "return state",
+        "func": "a=msg.payload.state\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 160,
+        "wires": [
+            [
+                "5a52421af253619e"
+            ]
+        ]
+    },
+    {
+        "id": "5a52421af253619e",
+        "type": "ui_switch",
+        "z": "41bf12d61cceb1af",
+        "d": true,
+        "name": "ON/OFF",
+        "label": "On/Off",
+        "tooltip": "",
+        "group": "968adf5ec2a351cd",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "false",
+        "topic": "state",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 560,
+        "y": 140,
+        "wires": [
+            [
+                "1b5f010113337792",
+                "49b2ea5f46c99562"
+            ]
+        ]
+    },
+    {
+        "id": "50edf35eb2bafcb6",
+        "type": "mqtt out",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "topic": "wifi/to/node3",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e0aec7d65c99bf93",
+        "x": 890,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "e4e625fec9c38f54",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "1b5f010113337792",
+        "type": "join",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "1",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 710,
+        "y": 200,
+        "wires": [
+            [
+                "e4e625fec9c38f54",
+                "50edf35eb2bafcb6"
+            ]
+        ]
+    },
+    {
+        "id": "49b2ea5f46c99562",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "ab533d44c6875e95",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "return mode",
+        "func": "a=msg.payload.mode\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 200,
+        "wires": [
+            [
+                "ec388bb54ebe521f"
+            ]
+        ]
+    },
+    {
+        "id": "ec388bb54ebe521f",
+        "type": "ui_slider",
+        "z": "41bf12d61cceb1af",
+        "d": true,
+        "name": "",
+        "label": "slider",
+        "tooltip": "",
+        "group": "968adf5ec2a351cd",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "mode",
+        "topicType": "str",
+        "min": 0,
+        "max": "2",
+        "step": 1,
+        "className": "",
+        "x": 550,
+        "y": 200,
+        "wires": [
+            [
+                "1b5f010113337792"
+            ]
+        ]
+    },
+    {
+        "id": "dfc16a2c5d0e25a4",
+        "type": "mqtt in",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "topic": "wifi/from/node2",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e0aec7d65c99bf93",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 300,
+        "wires": [
+            [
+                "92f98133e0e7838d",
+                "20f67713d4797cdd"
+            ]
+        ]
+    },
+    {
+        "id": "20f67713d4797cdd",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 330,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "8f5a079781b4ae8a",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "Temperature Wifi2",
+        "func": "a=msg.payload.temp\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 360,
+        "wires": [
+            [
+                "8de538b7c237961f"
+            ]
+        ]
+    },
+    {
+        "id": "5055a24807d2d84e",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "Humidity Wifi 2",
+        "func": "a=msg.payload.humid\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 400,
+        "wires": [
+            [
+                "ac5edbaacc5f7fe8"
+            ]
+        ]
+    },
+    {
+        "id": "92f98133e0e7838d",
+        "type": "json",
+        "z": "41bf12d61cceb1af",
+        "name": "MsgtoMap",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "8f5a079781b4ae8a",
+                "5055a24807d2d84e"
+            ]
+        ]
+    },
+    {
+        "id": "8de538b7c237961f",
+        "type": "ui_gauge",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "group": "968adf5ec2a351cd",
+        "order": 13,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Temperature Wifi2",
+        "label": "*C",
+        "format": "{{value}}",
+        "min": "10",
+        "max": "40",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 590,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "ac5edbaacc5f7fe8",
+        "type": "ui_gauge",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "group": "968adf5ec2a351cd",
+        "order": 14,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Humidity Wifi2",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "20",
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 580,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "0353ac022c309f49",
+        "type": "mqtt in",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "topic": "wifi/from/node4",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e0aec7d65c99bf93",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 500,
+        "wires": [
+            [
+                "2bd5f86da7dbc92d",
+                "a89d34b23ae81ac2",
+                "9a297d6370ddd9ce"
+            ]
+        ]
+    },
+    {
+        "id": "2bd5f86da7dbc92d",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "a89d34b23ae81ac2",
+        "type": "json",
+        "z": "41bf12d61cceb1af",
+        "name": "MsgtoMap",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 230,
+        "y": 580,
+        "wires": [
+            [
+                "75f1acd04be82a4b",
+                "66a12f90f35a5d5a",
+                "e235815dcdcaa408"
+            ]
+        ]
+    },
+    {
+        "id": "75f1acd04be82a4b",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "return temp",
+        "func": "a=msg.payload.temp\nif(a==0){\n    a=23;\n}\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 620,
+        "wires": [
+            [
+                "88141cf96668643f"
+            ]
+        ]
+    },
+    {
+        "id": "88141cf96668643f",
+        "type": "ui_numeric",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "label": "Temperature",
+        "tooltip": "",
+        "group": "2a1ca4d3c9c5466e",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": false,
+        "topic": "temperature",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": "15",
+        "max": "30",
+        "step": 1,
+        "className": "",
+        "x": 570,
+        "y": 640,
+        "wires": [
+            [
+                "3973cc34a57b013a"
+            ]
+        ]
+    },
+    {
+        "id": "66a12f90f35a5d5a",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "return state",
+        "func": "a=msg.payload.state\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 540,
+        "wires": [
+            [
+                "9f7f2a9135ce6cf8"
+            ]
+        ]
+    },
+    {
+        "id": "9f7f2a9135ce6cf8",
+        "type": "ui_switch",
+        "z": "41bf12d61cceb1af",
+        "d": true,
+        "name": "ON/OFF",
+        "label": "On/Off",
+        "tooltip": "",
+        "group": "2a1ca4d3c9c5466e",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "state",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 580,
+        "y": 520,
+        "wires": [
+            [
+                "3973cc34a57b013a",
+                "bdb9789efb8a27ea"
+            ]
+        ]
+    },
+    {
+        "id": "ec0eb0d1f44f849d",
+        "type": "mqtt out",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "topic": "wifi/to/nodi4",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e0aec7d65c99bf93",
+        "x": 910,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "620f5721a3a3c0b8",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "3973cc34a57b013a",
+        "type": "join",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "1",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 730,
+        "y": 580,
+        "wires": [
+            [
+                "620f5721a3a3c0b8",
+                "ec0eb0d1f44f849d"
+            ]
+        ]
+    },
+    {
+        "id": "bdb9789efb8a27ea",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "e235815dcdcaa408",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "return mode",
+        "func": "a=msg.payload.mode\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 580,
+        "wires": [
+            [
+                "853187a6edcb918a"
+            ]
+        ]
+    },
+    {
+        "id": "853187a6edcb918a",
+        "type": "ui_slider",
+        "z": "41bf12d61cceb1af",
+        "d": true,
+        "name": "",
+        "label": "slider",
+        "tooltip": "",
+        "group": "2a1ca4d3c9c5466e",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "mode",
+        "topicType": "str",
+        "min": 0,
+        "max": "2",
+        "step": 1,
+        "className": "",
+        "x": 570,
+        "y": 580,
+        "wires": [
+            [
+                "3973cc34a57b013a"
+            ]
+        ]
+    },
+    {
+        "id": "c9fd801c76b3a9d7",
+        "type": "mqtt in",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "topic": "ble/from/node2",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e0aec7d65c99bf93",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 680,
+        "wires": [
+            [
+                "343c55f6d157e7f7",
+                "23e9d8d7780d2497"
+            ]
+        ]
+    },
+    {
+        "id": "23e9d8d7780d2497",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "977fd2a2fbe55384",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "Temperature ble2",
+        "func": "a=msg.payload.temp\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 740,
+        "wires": [
+            [
+                "0febe7adf6b1fb60"
+            ]
+        ]
+    },
+    {
+        "id": "1a5a206ddffab733",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "Humidity ble2",
+        "func": "a=msg.payload.humid\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 780,
+        "wires": [
+            [
+                "80385130c07b94d7"
+            ]
+        ]
+    },
+    {
+        "id": "343c55f6d157e7f7",
+        "type": "json",
+        "z": "41bf12d61cceb1af",
+        "name": "MsgtoMap",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 170,
+        "y": 760,
+        "wires": [
+            [
+                "977fd2a2fbe55384",
+                "1a5a206ddffab733"
+            ]
+        ]
+    },
+    {
+        "id": "0febe7adf6b1fb60",
+        "type": "ui_gauge",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "group": "2a1ca4d3c9c5466e",
+        "order": 13,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Temperature ble2",
+        "label": "*C",
+        "format": "{{value}}",
+        "min": "10",
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 610,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "80385130c07b94d7",
+        "type": "ui_gauge",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "group": "2a1ca4d3c9c5466e",
+        "order": 14,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Humidity ble2",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "20",
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 600,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "8e4d74d386f997f6",
+        "type": "mqtt in",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "topic": "ble/from/node1",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e0aec7d65c99bf93",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 880,
+        "wires": [
+            [
+                "c1b450d824aad6d4",
+                "c5441dbe487dc928",
+                "371e04dfae4da880"
+            ]
+        ]
+    },
+    {
+        "id": "c1b450d824aad6d4",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "c5441dbe487dc928",
+        "type": "json",
+        "z": "41bf12d61cceb1af",
+        "name": "MsgtoMap",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 210,
+        "y": 960,
+        "wires": [
+            [
+                "1a0c02b3a7f8ec92",
+                "b0b8a850d1d73868",
+                "3a99f83992b41597"
+            ]
+        ]
+    },
+    {
+        "id": "1a0c02b3a7f8ec92",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "return temp",
+        "func": "a=msg.payload.temp\nif(a==0){\n    a=23;\n}\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1000,
+        "wires": [
+            [
+                "93aef30d81ee85ef"
+            ]
+        ]
+    },
+    {
+        "id": "93aef30d81ee85ef",
+        "type": "ui_numeric",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "label": "Temperature",
+        "tooltip": "",
+        "group": "0f3db89eb5a57c0b",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": false,
+        "topic": "temperature",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": "15",
+        "max": "30",
+        "step": 1,
+        "className": "",
+        "x": 550,
+        "y": 1020,
+        "wires": [
+            [
+                "e281a2d0a4495d20"
+            ]
+        ]
+    },
+    {
+        "id": "b0b8a850d1d73868",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "return state",
+        "func": "a=msg.payload.state\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 920,
+        "wires": [
+            [
+                "2c5d91305a51bc23"
+            ]
+        ]
+    },
+    {
+        "id": "2c5d91305a51bc23",
+        "type": "ui_switch",
+        "z": "41bf12d61cceb1af",
+        "d": true,
+        "name": "ON/OFF",
+        "label": "On/Off",
+        "tooltip": "",
+        "group": "0f3db89eb5a57c0b",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "state",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 560,
+        "y": 900,
+        "wires": [
+            [
+                "e281a2d0a4495d20",
+                "a8e85c882d342318"
+            ]
+        ]
+    },
+    {
+        "id": "e865839b03460c2b",
+        "type": "mqtt out",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "topic": "ble/to/node1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e0aec7d65c99bf93",
+        "x": 890,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "51a459d5b318538e",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "e281a2d0a4495d20",
+        "type": "join",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "1",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 710,
+        "y": 960,
+        "wires": [
+            [
+                "51a459d5b318538e",
+                "e865839b03460c2b"
+            ]
+        ]
+    },
+    {
+        "id": "a8e85c882d342318",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "3a99f83992b41597",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "return mode",
+        "func": "a=msg.payload.mode\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 960,
+        "wires": [
+            [
+                "107ee93e29fbf863"
+            ]
+        ]
+    },
+    {
+        "id": "107ee93e29fbf863",
+        "type": "ui_slider",
+        "z": "41bf12d61cceb1af",
+        "d": true,
+        "name": "",
+        "label": "slider",
+        "tooltip": "",
+        "group": "0f3db89eb5a57c0b",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "mode",
+        "topicType": "str",
+        "min": 0,
+        "max": "2",
+        "step": 1,
+        "className": "",
+        "x": 550,
+        "y": 960,
+        "wires": [
+            [
+                "e281a2d0a4495d20"
+            ]
+        ]
+    },
+    {
+        "id": "3aaadb25e5a39bcd",
+        "type": "mqtt in",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "topic": "xbee/from/node2",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e0aec7d65c99bf93",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 1060,
+        "wires": [
+            [
+                "20e09c9d7df3287b",
+                "a74df1931e9def36"
+            ]
+        ]
+    },
+    {
+        "id": "a74df1931e9def36",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 330,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "016eaaf4f41ac470",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "Temperature ble2",
+        "func": "a=msg.payload.temp\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 1120,
+        "wires": [
+            [
+                "b8127318743bfec2"
+            ]
+        ]
+    },
+    {
+        "id": "28a384a7940b86b5",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "Humidity ble2",
+        "func": "a=msg.payload.humid\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 1160,
+        "wires": [
+            [
+                "d4be62d261067f76"
+            ]
+        ]
+    },
+    {
+        "id": "20e09c9d7df3287b",
+        "type": "json",
+        "z": "41bf12d61cceb1af",
+        "name": "MsgtoMap",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 150,
+        "y": 1140,
+        "wires": [
+            [
+                "016eaaf4f41ac470",
+                "28a384a7940b86b5"
+            ]
+        ]
+    },
+    {
+        "id": "b8127318743bfec2",
+        "type": "ui_gauge",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "group": "0f3db89eb5a57c0b",
+        "order": 13,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Temperature xbee2",
+        "label": "*C",
+        "format": "{{value}}",
+        "min": "10",
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 590,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "d4be62d261067f76",
+        "type": "ui_gauge",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "group": "0f3db89eb5a57c0b",
+        "order": 14,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Humidity xbee2",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "20",
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 580,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "76f20ab6b8bbfde2",
+        "type": "mqtt in",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "topic": "xbee/from/node1",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e0aec7d65c99bf93",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 1300,
+        "wires": [
+            [
+                "7ded61b2a56dfa69",
+                "84aaa653274118b8",
+                "0e15fe5484c431df"
+            ]
+        ]
+    },
+    {
+        "id": "7ded61b2a56dfa69",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "84aaa653274118b8",
+        "type": "json",
+        "z": "41bf12d61cceb1af",
+        "name": "MsgtoMap",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 210,
+        "y": 1380,
+        "wires": [
+            [
+                "1780bc40afa14557",
+                "e6958271aed6344d",
+                "3a0343178c04ae3e"
+            ]
+        ]
+    },
+    {
+        "id": "1780bc40afa14557",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "return temp",
+        "func": "a=msg.payload.temp\nif(a==0){\n    a=23;\n}\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1420,
+        "wires": [
+            [
+                "1c85e6e18b421273"
+            ]
+        ]
+    },
+    {
+        "id": "1c85e6e18b421273",
+        "type": "ui_numeric",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "label": "Temperature",
+        "tooltip": "",
+        "group": "b861e1ee8c8d5adf",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": false,
+        "topic": "temperature",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": "15",
+        "max": "30",
+        "step": 1,
+        "className": "",
+        "x": 550,
+        "y": 1440,
+        "wires": [
+            [
+                "1a6f8c7c88fc6d5c"
+            ]
+        ]
+    },
+    {
+        "id": "e6958271aed6344d",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "return state",
+        "func": "a=msg.payload.state\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1340,
+        "wires": [
+            [
+                "ce7fb4b9dd7a0d0f"
+            ]
+        ]
+    },
+    {
+        "id": "ce7fb4b9dd7a0d0f",
+        "type": "ui_switch",
+        "z": "41bf12d61cceb1af",
+        "d": true,
+        "name": "ON/OFF",
+        "label": "On/Off",
+        "tooltip": "",
+        "group": "b861e1ee8c8d5adf",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "state",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 560,
+        "y": 1320,
+        "wires": [
+            [
+                "1a6f8c7c88fc6d5c",
+                "d085a9642d1c08bc"
+            ]
+        ]
+    },
+    {
+        "id": "9d1af517af9906ac",
+        "type": "mqtt out",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "topic": "ble/to/node1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e0aec7d65c99bf93",
+        "x": 890,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "962c41c32d05c79e",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "1a6f8c7c88fc6d5c",
+        "type": "join",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "1",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 710,
+        "y": 1380,
+        "wires": [
+            [
+                "962c41c32d05c79e",
+                "9d1af517af9906ac"
+            ]
+        ]
+    },
+    {
+        "id": "d085a9642d1c08bc",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "3a0343178c04ae3e",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "return mode",
+        "func": "a=msg.payload.mode\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1380,
+        "wires": [
+            [
+                "70135b44d15a8d1f"
+            ]
+        ]
+    },
+    {
+        "id": "70135b44d15a8d1f",
+        "type": "ui_slider",
+        "z": "41bf12d61cceb1af",
+        "d": true,
+        "name": "",
+        "label": "slider",
+        "tooltip": "",
+        "group": "0f3db89eb5a57c0b",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "mode",
+        "topicType": "str",
+        "min": 0,
+        "max": "2",
+        "step": 1,
+        "className": "",
+        "x": 550,
+        "y": 1380,
+        "wires": [
+            [
+                "1a6f8c7c88fc6d5c"
+            ]
+        ]
+    },
+    {
+        "id": "3f0609438cb9fa69",
+        "type": "mqtt in",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "topic": "wifi/from/node1",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e0aec7d65c99bf93",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 1480,
+        "wires": [
+            [
+                "b00d337c2c9dcf2f",
+                "943d5f2a7cd34db7"
+            ]
+        ]
+    },
+    {
+        "id": "943d5f2a7cd34db7",
+        "type": "debug",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 330,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "dd98356e8bc55818",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "Temperature ble2",
+        "func": "a=msg.payload.temp\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 1540,
+        "wires": [
+            [
+                "419b2cde2826d768"
+            ]
+        ]
+    },
+    {
+        "id": "910559bbdb655b42",
+        "type": "function",
+        "z": "41bf12d61cceb1af",
+        "name": "Humidity ble2",
+        "func": "a=msg.payload.humid\nreturn {payload:a};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 1580,
+        "wires": [
+            [
+                "4d10301ae4e23d6c"
+            ]
+        ]
+    },
+    {
+        "id": "b00d337c2c9dcf2f",
+        "type": "json",
+        "z": "41bf12d61cceb1af",
+        "name": "MsgtoMap",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 150,
+        "y": 1560,
+        "wires": [
+            [
+                "dd98356e8bc55818",
+                "910559bbdb655b42"
+            ]
+        ]
+    },
+    {
+        "id": "419b2cde2826d768",
+        "type": "ui_gauge",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "group": "b861e1ee8c8d5adf",
+        "order": 13,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Temperature wifi1",
+        "label": "*C",
+        "format": "{{value}}",
+        "min": "10",
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 590,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "4d10301ae4e23d6c",
+        "type": "ui_gauge",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "group": "b861e1ee8c8d5adf",
+        "order": 14,
+        "width": "3",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Humidity wifi1",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "20",
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 580,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "ce8d0aea405574de",
+        "type": "file",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "filename": "/home/pi/Desktop/project/logs/file1.txt",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 350,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9a297d6370ddd9ce",
+        "type": "file",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "filename": "/home/pi/Desktop/project/logs/file2.txt",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 430,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "371e04dfae4da880",
+        "type": "file",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "filename": "/home/pi/Desktop/project/logs/file3.txt",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 330,
+        "y": 840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0e15fe5484c431df",
+        "type": "file",
+        "z": "41bf12d61cceb1af",
+        "name": "",
+        "filename": "/home/pi/Desktop/project/logs/file4.txt",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 370,
+        "y": 1240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e0aec7d65c99bf93",
+        "type": "mqtt-broker",
+        "name": "RPI",
+        "broker": "192.168.43.84",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "968adf5ec2a351cd",
+        "type": "ui_group",
+        "name": "First",
+        "tab": "b34ba33eb417a457",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2a1ca4d3c9c5466e",
+        "type": "ui_group",
+        "name": "Second",
+        "tab": "b34ba33eb417a457",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0f3db89eb5a57c0b",
+        "type": "ui_group",
+        "name": "Third",
+        "tab": "b34ba33eb417a457",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b861e1ee8c8d5adf",
+        "type": "ui_group",
+        "name": "Fourth",
+        "tab": "b34ba33eb417a457",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b34ba33eb417a457",
+        "type": "ui_tab",
+        "name": "Project",
+        "icon": "dashboard",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    }
+]
